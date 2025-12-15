@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Request Consulting | AI Business Fusion</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; line-height: 1.6; }
+    header { padding: 28px 18px; border-bottom: 1px solid #e6e6e6; }
+    nav a { margin-right: 14px; text-decoration: none; color: #111; font-weight: 600; }
+    main { max-width: 860px; padding: 22px 18px; margin: 0 auto; }
+    .card { border: 1px solid #e6e6e6; border-radius: 12px; padding: 18px; margin-top: 16px; }
+    label { display:block; margin-top: 12px; font-weight: 700; }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    button {
+      margin-top: 14px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid #111;
+      background: #fff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .note { font-size: 13px; color: #555; }
+    footer { padding: 18px; border-top: 1px solid #e6e6e6; margin-top: 26px; font-size: 14px; color: #555; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="margin:0;">AI Business Fusion</h1>
+    <p style="margin:6px 0 0;">Request consulting. We will reply by email.</p>
+    <nav style="margin-top:12px;">
+      <a href="index.html">About Us</a>
+      <a href="request.html">Request Consulting</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Consulting Request Form</h2>
+      <p class="note">Fill this out and hit submit. Your message will be emailed to us.</p>
+
+      <!-- IMPORTANT: You will replace the action URL in Step 5 -->
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <label for="name">Full name</label>
+        <input id="name" name="name" type="text" required />
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required />
+
+        <label for="company">Company or project (optional)</label>
+        <input id="company" name="company" type="text" />
+
+        <label for="type">What do you need help with?</label>
+        <select id="type" name="consulting_type" required>
+          <option value="">Select one</option>
+          <option>AI workflow automation</option>
+          <option>AI strategy and planning</option>
+          <option>Customer support automation</option>
+          <option>Process improvement with AI</option>
+          <option>Other</option>
+        </select>
+
+        <label for="details">Describe what you are trying to do</label>
+        <textarea id="details" name="details" rows="6" required></textarea>
+
+        <button type="submit">Submit Request</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year"></span> AI Business Fusion
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
