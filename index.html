@@ -4,57 +4,383 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AI Business Fusion</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; line-height: 1.6; }
-    header { padding: 28px 18px; border-bottom: 1px solid #e6e6e6; }
-    nav a { margin-right: 14px; text-decoration: none; color: #111; font-weight: 600; }
-    main { max-width: 860px; padding: 22px 18px; margin: 0 auto; }
-    .card { border: 1px solid #e6e6e6; border-radius: 12px; padding: 18px; margin-top: 16px; }
-    .btn { display: inline-block; margin-top: 10px; padding: 10px 14px; border-radius: 10px; border: 1px solid #111; text-decoration: none; color: #111; font-weight: 700; }
-    footer { padding: 18px; border-top: 1px solid #e6e6e6; margin-top: 26px; font-size: 14px; color: #555; }
+    :root{
+      --bg: #070A12;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.08);
+      --stroke: rgba(255,255,255,0.12);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.72);
+      --muted2: rgba(255,255,255,0.55);
+      --accent: #7C3AED;     /* purple */
+      --accent2: #22D3EE;    /* cyan */
+      --shadow: 0 18px 50px rgba(0,0,0,0.45);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(900px 500px at 15% 10%, rgba(124,58,237,0.30), transparent 55%),
+                  radial-gradient(800px 450px at 80% 15%, rgba(34,211,238,0.25), transparent 55%),
+                  radial-gradient(900px 600px at 40% 95%, rgba(124,58,237,0.18), transparent 60%),
+                  var(--bg);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+    /* Top nav */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(7,10,18,0.55);
+      border-bottom: 1px solid var(--stroke);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 14px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+    .logo{
+      width: 38px; height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(34,211,238,1));
+      box-shadow: 0 10px 30px rgba(124,58,237,0.30);
+      position: relative;
+      overflow: hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.35), transparent 55%);
+      transform: rotate(25deg);
+    }
+    .navlinks{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+      justify-content: flex-end;
+    }
+    .pill{
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 14px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .pill:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.18);
+    }
+    .pill.active{
+      color: var(--text);
+      background: rgba(124,58,237,0.18);
+      border-color: rgba(124,58,237,0.45);
+    }
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      margin-top: 20px;
+    }
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-left{
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(500px 240px at 30% 10%, rgba(34,211,238,0.22), transparent 60%),
+                  radial-gradient(500px 240px at 70% 20%, rgba(124,58,237,0.26), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-left > * { position: relative; }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .dot{
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 18px rgba(34,211,238,0.45);
+    }
+
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(34px, 4vw, 46px);
+      line-height: 1.05;
+      letter-spacing: -0.5px;
+    }
+    .sub{
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 60ch;
+    }
+
+    .cta-row{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      font-weight: 800;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.04);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.18);
+    }
+    .btn.primary{
+      border-color: rgba(124,58,237,0.55);
+      background: linear-gradient(135deg, rgba(124,58,237,0.85), rgba(34,211,238,0.60));
+      box-shadow: 0 16px 40px rgba(124,58,237,0.25);
+    }
+    .btn.primary:hover{
+      border-color: rgba(34,211,238,0.70);
+    }
+
+    .hero-right{
+      padding: 0;
+      overflow:hidden;
+      position: relative;
+      min-height: 280px;
+    }
+    .hero-img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.05) contrast(1.05);
+      transform: scale(1.03);
+    }
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      background: radial-gradient(700px 350px at 20% 15%, rgba(124,58,237,0.35), transparent 55%),
+                  radial-gradient(700px 350px at 80% 15%, rgba(34,211,238,0.25), transparent 55%),
+                  linear-gradient(180deg, rgba(7,10,18,0.15), rgba(7,10,18,0.65));
+      pointer-events:none;
+    }
+    .hero-badge{
+      position:absolute;
+      left: 16px;
+      bottom: 16px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--stroke);
+      background: rgba(7,10,18,0.55);
+      backdrop-filter: blur(12px);
+      max-width: 92%;
+    }
+    .mono{
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      color: var(--muted2);
+      margin: 0 0 4px;
+    }
+    .badge-title{
+      margin: 0;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+    }
+
+    /* Sections */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+    .mini{
+      padding: 18px;
+    }
+    .mini h3{
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: -0.2px;
+    }
+    .mini p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section{
+      margin-top: 16px;
+      padding: 20px;
+    }
+    .section h2{
+      margin: 0 0 10px;
+      letter-spacing: -0.2px;
+    }
+    .list{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .list li{ margin: 8px 0; }
+
+    footer{
+      margin-top: 22px;
+      padding: 20px 0 30px;
+      color: var(--muted2);
+      font-size: 14px;
+      text-align:center;
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1 style="margin:0;">AI Business Fusion</h1>
-    <p style="margin:6px 0 0;">Practical AI consulting for real business problems.</p>
-    <nav style="margin-top:12px;">
-      <a href="index.html">About Us</a>
-      <a href="request.html">Request Consulting</a>
-    </nav>
-  </header>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="font-size:14px; line-height:1; opacity:.95;">AI Business Fusion</div>
+          <div style="font-size:12px; color: var(--muted2); margin-top:3px;">AI consulting</div>
+        </div>
+      </div>
+      <div class="navlinks">
+        <a class="pill active" href="index.html">About Us</a>
+        <a class="pill" href="request.html">Request Consulting</a>
+      </div>
+    </div>
+  </div>
 
-  <main>
-    <div class="card">
+  <div class="container">
+    <section class="hero">
+      <div class="card hero-left">
+        <div class="kicker"><span class="dot"></span> Practical AI, not hype</div>
+        <h1>Make AI useful in your business.</h1>
+        <p class="sub">
+          AI Business Fusion helps teams automate repetitive work, tighten up workflows, and turn scattered processes into something clean and scalable.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="request.html">Request Consulting</a>
+          <a class="btn" href="#services">What we do</a>
+        </div>
+      </div>
+
+      <div class="card hero-right">
+        <!-- You can swap this image URL anytime -->
+        <img
+          class="hero-img"
+          src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80"
+          alt="Abstract AI network visualization"
+        />
+        <div class="hero-overlay"></div>
+        <div class="hero-badge">
+          <p class="mono">Fast setup • Clear next steps • Real outcomes</p>
+          <p class="badge-title">Online AI Consulting</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" id="services">
+      <div class="card mini">
+        <h3>Automation that saves time</h3>
+        <p>Turn manual tasks into simple workflows using tools you already use. Email, docs, spreadsheets, CRM, scheduling.</p>
+      </div>
+      <div class="card mini">
+        <h3>AI strategy that stays realistic</h3>
+        <p>We focus on what is worth doing now. No giant rebuilds. Just a plan you can actually execute.</p>
+      </div>
+      <div class="card mini">
+        <h3>Systems that scale</h3>
+        <p>Clean processes, better templates, tighter handoffs. Less chaos, more consistency.</p>
+      </div>
+    </section>
+
+    <section class="card section">
       <h2>About Us</h2>
-      <p>
-        AI Business Fusion helps individuals and small to mid-sized teams use AI in a practical way.
-        The goal is simple: save time, reduce busywork, and make smarter decisions using tools that
-        actually fit your workflow.
+      <p style="color: var(--muted); margin-top: 0;">
+        AI Business Fusion is an AI consulting brand built around practical improvements. The goal is simple: help you use AI to reduce busywork and move faster, without adding confusion.
       </p>
-      <p>
-        Consulting can include automating repetitive tasks, building simple AI-assisted processes,
-        improving customer communication, organizing knowledge, or identifying where AI can create
-        real value without adding complexity.
-      </p>
-      <a class="btn" href="request.html">Request Consulting</a>
-    </div>
 
-    <div class="card">
-      <h3>What we can help with</h3>
-      <ul>
+      <h3 style="margin: 16px 0 8px;">Common areas we help with</h3>
+      <ul class="list">
         <li>Workflow automation using AI tools</li>
-        <li>AI strategy for small teams and startups</li>
-        <li>Customer support and email response assistance</li>
-        <li>Docs, knowledge base, and internal process improvements</li>
-        <li>Basic data cleanup and insights planning</li>
+        <li>Process improvements and standard operating procedures</li>
+        <li>Customer support message drafting and response systems</li>
+        <li>Knowledge base setup so information stops getting lost</li>
+        <li>Planning how to adopt AI safely and responsibly</li>
       </ul>
-    </div>
-  </main>
+    </section>
 
-  <footer>
-    © <span id="year"></span> AI Business Fusion
-  </footer>
+    <footer>
+      © <span id="year"></span> AI Business Fusion
+    </footer>
+  </div>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
