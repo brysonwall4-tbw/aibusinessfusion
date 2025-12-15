@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Business Fusion</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; line-height: 1.6; }
+    header { padding: 28px 18px; border-bottom: 1px solid #e6e6e6; }
+    nav a { margin-right: 14px; text-decoration: none; color: #111; font-weight: 600; }
+    main { max-width: 860px; padding: 22px 18px; margin: 0 auto; }
+    .card { border: 1px solid #e6e6e6; border-radius: 12px; padding: 18px; margin-top: 16px; }
+    .btn { display: inline-block; margin-top: 10px; padding: 10px 14px; border-radius: 10px; border: 1px solid #111; text-decoration: none; color: #111; font-weight: 700; }
+    footer { padding: 18px; border-top: 1px solid #e6e6e6; margin-top: 26px; font-size: 14px; color: #555; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="margin:0;">AI Business Fusion</h1>
+    <p style="margin:6px 0 0;">Practical AI consulting for real business problems.</p>
+    <nav style="margin-top:12px;">
+      <a href="index.html">About Us</a>
+      <a href="request.html">Request Consulting</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>About Us</h2>
+      <p>
+        AI Business Fusion helps individuals and small to mid-sized teams use AI in a practical way.
+        The goal is simple: save time, reduce busywork, and make smarter decisions using tools that
+        actually fit your workflow.
+      </p>
+      <p>
+        Consulting can include automating repetitive tasks, building simple AI-assisted processes,
+        improving customer communication, organizing knowledge, or identifying where AI can create
+        real value without adding complexity.
+      </p>
+      <a class="btn" href="request.html">Request Consulting</a>
+    </div>
+
+    <div class="card">
+      <h3>What we can help with</h3>
+      <ul>
+        <li>Workflow automation using AI tools</li>
+        <li>AI strategy for small teams and startups</li>
+        <li>Customer support and email response assistance</li>
+        <li>Docs, knowledge base, and internal process improvements</li>
+        <li>Basic data cleanup and insights planning</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year"></span> AI Business Fusion
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
